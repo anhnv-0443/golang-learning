@@ -19,3 +19,9 @@ const (
 	// TokenLifetime 7days
 	TokenLifetime = time.Hour * 7 * 24
 )
+
+// Input for ParseInt
+const (
+	Int64Num   = 64
+	DecimalNum = 10
+)
