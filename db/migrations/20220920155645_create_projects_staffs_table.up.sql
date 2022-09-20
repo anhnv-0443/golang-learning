@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS projects_staffs
+(
+    id BIGSERIAL PRIMARY KEY,
+    project_id BIGSERIAL NOT NULL,
+    staff_id BIGSERIAL NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP,
+    CONSTRAINT fk_staff_id FOREIGN KEY (staff_id) REFERENCES staffs(id),
+    CONSTRAINT fk_project_id FOREIGN KEY (project_id) REFERENCES projects(id)
+);
