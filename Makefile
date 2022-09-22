@@ -19,3 +19,4 @@ build-mock:
 	mockgen -source=internal/domain/user.go -destination=internal/domain/mock/user_mock.go
 	mockgen -source=internal/domain/role.go -destination=internal/domain/mock/role_mock.go
 	mockgen -source=internal/domain/auth.go -destination=internal/domain/mock/auth_mock.go
+	mockgen -source=internal/domain/slack.go -destination=internal/domain/mock/slack_mock.go
