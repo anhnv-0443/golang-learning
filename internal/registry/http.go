@@ -5,6 +5,7 @@ import (
 	"go-app/internal/domain"
 	authHttp "go-app/internal/modules/auth/delivery/http"
 	roleHttp "go-app/internal/modules/role/delivery/http"
+	staffHttp "go-app/internal/modules/staff/delivery/http"
 	userHttp "go-app/internal/modules/user/delivery/http"
 	"go-app/pkg/validate"
 	"net/http"
@@ -41,6 +42,7 @@ func NewHTTPHandler(e *echo.Echo, uc *Usecase) {
 
 	roleHttp.NewHandler(g, uc.RoleUsecase)
 	userHttp.NewHandler(g, uc.UserUsecase)
+	staffHttp.NewHandler(g, uc.StaffUsecase)
 }
 
 func corsAllowOrigin(origin string) (bool, error) {
