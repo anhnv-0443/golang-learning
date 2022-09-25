@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS language_code;
+DROP TABLE IF EXISTS language_codes;

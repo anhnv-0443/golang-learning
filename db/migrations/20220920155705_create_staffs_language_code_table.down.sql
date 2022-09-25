@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS staffs_language_code;
+DROP TABLE IF EXISTS staffs_language_codes;

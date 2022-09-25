@@ -11,6 +11,8 @@ import (
 
 	roleRepository "go-app/internal/modules/role/repository"
 	userRepository "go-app/internal/modules/user/repository"
+	languageCodeRepository "go-app/internal/modules/language_code/repository"
+	positionRepository "go-app/internal/modules/position/repository"
 )
 
 var pathJSON = "cmd/seed/data.json"
@@ -18,6 +20,8 @@ var pathJSON = "cmd/seed/data.json"
 type seedData struct {
 	Roles []domain.Role `json:"roles"`
 	Users []domain.User `json:"users"`
+	Language_codes []domain.LanguageCode `json:"language_codes"`
+	Positions []domain.Position `json:"positions"`
 }
 
 // Seed is function that seed data
@@ -29,6 +33,8 @@ func Seed(dbConfig config.Database) error {
 
 	userRepo := userRepository.NewRepository(db)
 	roleRepo := roleRepository.NewRepository(db)
+	languageCodeRepo := languageCodeRepository.NewRepository(db)
+	positionRepo := positionRepository.NewRepository(db)
 
 	viper.SetConfigFile(pathJSON)
 	err = viper.ReadInConfig()
@@ -51,6 +57,20 @@ func Seed(dbConfig config.Database) error {
 
 	for _, u := range data.Users {
 		err = userRepo.Store(context.Background(), &u)
+		if err != nil {
+			return errors.Wrap(err)
+		}
+	}
+
+	for _, u := range data.Language_codes {
+		err = languageCodeRepo.Store(context.Background(), &u)
+		if err != nil {
+			return errors.Wrap(err)
+		}
+	}
+
+	for _, u := range data.Positions {
+		err = positionRepo.Store(context.Background(), &u)
 		if err != nil {
 			return errors.Wrap(err)
 		}
