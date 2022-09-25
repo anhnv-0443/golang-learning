@@ -35,6 +35,15 @@ services:
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - postgres_volume:/var/lib/postgresql/data
+  adminer:
+    image: adminer:latest
+    restart: always
+    depends_on:
+      - db
+    networks:
+      - go-app-net
+    ports:
+      - "8081:8080"
 networks:
   go-app-net:
     driver: bridge

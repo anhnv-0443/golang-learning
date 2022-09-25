@@ -2,13 +2,12 @@ package domain
 
 import (
 	"context"
-	"math/big"
 	"time"
 )
 
 // Staff entity
 type Staff struct {
-	ID          big.Int    `json:"id"`
+	ID          int        `json:"id"`
 	Name        string     `json:"name"`
 	Email       string     `json:"email"`
 	StaffCode   string     `json:"staff_code"`
@@ -16,7 +15,7 @@ type Staff struct {
 	Gender      int        `json:"gender"`
 	PhoneNumber string     `json:"phone_number"`
 	UnitId      int        `json:"unit_id"`
-	StaffTypeId int        `json:"staff_type_id"`
+	StaffTypeID int        `json:"staff_type_id"`
 	Address     string     `json:"address"`
 	CreatedAt   time.Time  `json:"created_at"`
 	UpdatedAt   time.Time  `json:"updated_at"`

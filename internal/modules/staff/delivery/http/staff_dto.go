@@ -3,7 +3,6 @@ package http
 import (
 	"go-app/internal/domain"
 
-	"math/big"
 	"time"
 )
 
@@ -19,13 +18,13 @@ type StaffRequest struct {
 	Gender      int    `json:"gender" validate:"required"`
 	PhoneNumber string `json:"phone_number" validate:"required"`
 	UnitId      int    `json:"unit_id" validate:"required"`
-	StaffTypeId int    `json:"staff_type_id" validate:"required"`
+	StaffTypeID int    `json:"staff_type_id" validate:"required"`
 	Address     string `json:"address" validate:"required"`
 }
 
 // StaffResponse is struct used for staff
 type StaffResponse struct {
-	ID          big.Int   `json:"id"`
+	ID          int       `json:"id"`
 	Name        string    `json:"name"`
 	Email       string    `json:"email"`
 	StaffCode   string    `json:"staff_code"`
@@ -33,7 +32,7 @@ type StaffResponse struct {
 	Gender      int       `json:"gender"`
 	PhoneNumber string    `json:"phone_number"`
 	UnitId      int       `json:"unit_id"`
-	StaffTypeId int       `json:"staff_type_id"`
+	StaffTypeID int       `json:"staff_type_id"`
 	Address     string    `json:"address"`
 	CreatedAt   time.Time `json:"created_at"`
 	UpdatedAt   time.Time `json:"updated_at"`
@@ -60,7 +59,7 @@ func ConvertStaffToResponse(staffs *domain.Staff) StaffResponse {
 		Gender:      staffs.Gender,
 		PhoneNumber: staffs.PhoneNumber,
 		UnitId:      staffs.UnitId,
-		StaffTypeId: staffs.StaffTypeId,
+		StaffTypeID: staffs.StaffTypeID,
 		Address:     staffs.Address,
 		CreatedAt:   staffs.CreatedAt,
 		UpdatedAt:   staffs.UpdatedAt,
@@ -82,7 +81,7 @@ func ConvertStaffsToResponse(staffs []domain.Staff) StaffsResponse {
 			Gender:      u.Gender,
 			PhoneNumber: u.PhoneNumber,
 			UnitId:      u.UnitId,
-			StaffTypeId: u.StaffTypeId,
+			StaffTypeID: u.StaffTypeID,
 			Address:     u.Address,
 			CreatedAt:   u.CreatedAt,
 			UpdatedAt:   u.UpdatedAt,
@@ -98,7 +97,14 @@ func ConvertStaffsToResponse(staffs []domain.Staff) StaffsResponse {
 //// ConvertRequestToEntity DTO
 func ConvertRequestToEntity(u *StaffRequest) *domain.Staff {
 	return &domain.Staff{
-		Name:  u.Name,
-		Email: u.Email,
+		Name:        u.Name,
+		Email:       u.Email,
+		StaffCode:   u.StaffCode,
+		BirthDate:   u.BirthDate,
+		Gender:      u.Gender,
+		PhoneNumber: u.PhoneNumber,
+		UnitId:      u.UnitId,
+		StaffTypeID: u.StaffTypeID,
+		Address:     u.Address,
 	}
 }

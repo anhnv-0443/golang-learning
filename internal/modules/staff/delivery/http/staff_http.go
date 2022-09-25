@@ -1,7 +1,6 @@
 package http
 
 import (
-	"fmt"
 	"go-app/internal/domain"
 	"net/http"
 	"strconv"
@@ -11,7 +10,8 @@ import (
 
 // UserHandler represent the httphandler
 type StaffHandler struct {
-	Usecase domain.StaffUsecase
+	Usecase                  domain.StaffUsecase
+	StaffLanguageCodeUsecase domain.StaffLanguageCodeUseCase
 }
 
 // NewHandler will initialize the Staffs/ resources endpoint
@@ -53,7 +53,6 @@ func (hl *StaffHandler) Show(c echo.Context) error {
 // Store will create data
 func (hl *StaffHandler) Store(c echo.Context) error {
 	staffReq := new(StaffRequest)
-	fmt.Println(staffReq)
 
 	if err := c.Bind(staffReq); err != nil {
 		return c.JSON(http.StatusUnprocessableEntity, &ErrorResponse{Message: err.Error()})
@@ -65,7 +64,7 @@ func (hl *StaffHandler) Store(c echo.Context) error {
 	}
 
 	staff := ConvertRequestToEntity(staffReq)
-
+		
 	ctx := c.Request().Context()
 	if err := hl.Usecase.Store(ctx, staff); err != nil {
 		return c.JSON(http.StatusBadRequest, &ErrorResponse{Message: err.Error()})

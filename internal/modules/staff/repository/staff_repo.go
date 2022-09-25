@@ -2,7 +2,6 @@ package repository
 
 import (
 	"context"
-	"fmt"
 	"go-app/internal/domain"
 	"go-app/pkg/errors"
 	"gorm.io/gorm"
@@ -40,7 +39,6 @@ func (rp *StaffRepository) Find(c context.Context, id int) (*domain.Staff, error
 
 // Store will create data to db
 func (rp *StaffRepository) Store(c context.Context, staff *domain.Staff) error {
-	fmt.Println(staff)
 	//passHash, err := utils.GeneratePassword(staff.Password)
 	//if err != nil {
 	//	return errors.Wrap(err)

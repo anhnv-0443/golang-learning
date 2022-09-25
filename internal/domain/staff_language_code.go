@@ -2,13 +2,12 @@ package domain
 
 import (
 	"context"
-	"math/big"
 )
 
 // StaffLanguageCode entity
 type StaffLanguageCode struct {
-	StaffId        big.Int `json:"staff_id"`
-	LanguageCodeId big.Int `json:"language_code_id"`
+	StaffId        int `json:"staff_id"`
+	LanguageCodeId int `json:"language_code_id"`
 }
 
 // StaffLanguageCodeRepository represent the StaffLanguageCode's usecases
