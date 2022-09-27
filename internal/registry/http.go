@@ -7,6 +7,7 @@ import (
 	languageCodeHttp "go-app/internal/modules/language_code/delivery/http"
 	positionHttp "go-app/internal/modules/position/delivery/http"
 	roleHttp "go-app/internal/modules/role/delivery/http"
+	slackHttp "go-app/internal/modules/slack/delivery/http"
 	staffHttp "go-app/internal/modules/staff/delivery/http"
 	userHttp "go-app/internal/modules/user/delivery/http"
 	"go-app/pkg/validate"
@@ -22,9 +23,12 @@ func NewHTTPHandler(e *echo.Echo, uc *Usecase) {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	e.Validator = validate.NewValidate()
-	g := e.Group("/api")
 
-	authGroup := g.Group("")
+	apiGroup := e.Group("/api")
+	slackGroup := e.Group("/slack")
+
+	authGroup := apiGroup.Group("")
+
 	authHttp.NewHandler(authGroup, uc.AuthUsecase)
 
 	DefaultJWTConfig := middleware.JWTConfig{
@@ -33,7 +37,7 @@ func NewHTTPHandler(e *echo.Echo, uc *Usecase) {
 		Claims:      &domain.Claims{},
 		SigningKey:  []byte(config.GetAppConfig().AppJWTKey),
 	}
-	g.Use(middleware.JWTWithConfig(DefaultJWTConfig))
+	apiGroup.Use(middleware.JWTWithConfig(DefaultJWTConfig))
 
 	// CORS restricted with a custom function to allow origins
 	// and with the GET, PUT, POST or DELETE methods allowed.
@@ -42,11 +46,16 @@ func NewHTTPHandler(e *echo.Echo, uc *Usecase) {
 		AllowMethods:    []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
 	}))
 
-	roleHttp.NewHandler(g, uc.RoleUsecase)
-	userHttp.NewHandler(g, uc.UserUsecase)
-	staffHttp.NewHandler(g, uc.StaffUsecase)
-	positionHttp.NewHandler(g, uc.PositionUsecase)
-	languageCodeHttp.NewHandler(g, uc.LanguageCodeUsecase)
+	staffHttp.NewHandler(apiGroup, uc.StaffUsecase)
+	positionHttp.NewHandler(apiGroup, uc.PositionUsecase)
+	languageCodeHttp.NewHandler(apiGroup, uc.LanguageCodeUsecase)
+	// Middleware verifying request from slack
+	slackGroup.Use(slackHttp.SlackVerifyingRequests(config.GetSlackConfig()))
+
+	roleHttp.NewHandler(apiGroup, uc.RoleUsecase)
+	userHttp.NewHandler(apiGroup, uc.UserUsecase)
+
+	slackHttp.NewHandler(slackGroup, uc.SlackUsecase)
 }
 
 func corsAllowOrigin(origin string) (bool, error) {

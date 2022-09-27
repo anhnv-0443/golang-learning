@@ -64,7 +64,7 @@ func (hl *StaffHandler) Store(c echo.Context) error {
 	}
 
 	staff := ConvertRequestToEntity(staffReq)
-		
+
 	ctx := c.Request().Context()
 	if err := hl.Usecase.Store(ctx, staff); err != nil {
 		return c.JSON(http.StatusBadRequest, &ErrorResponse{Message: err.Error()})
