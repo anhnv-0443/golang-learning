@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS issues(
+    id BIGSERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    status SMALLINT NOT NULL,
+    priority SMALLINT NOT NULL,
+    project_id BIGINT NOT NULL,
+    member_id BIGINT NOT NULL,
+    start_date DATE,
+    due_date DATE,
+    percent_done VARCHAR(4) NOT NULL,
+    estimate_time INT,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
