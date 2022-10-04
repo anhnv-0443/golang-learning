@@ -1,20 +1,18 @@
 package http
 
 import (
+	"github.com/labstack/echo/v4"
 	"go-app/internal/domain"
 	"net/http"
 	"strconv"
-
-	"github.com/labstack/echo/v4"
 )
 
-// UserHandler represent the httphandler
+// StaffHandler represent the httphandler
 type StaffHandler struct {
-	Usecase                  domain.StaffUsecase
-	StaffLanguageCodeUsecase domain.StaffLanguageCodeUseCase
+	Usecase domain.StaffUsecase
 }
 
-// NewHandler will initialize the Staffs/ resources endpoint
+// NewHandler will initialize the staffs/ resources endpoint
 func NewHandler(g *echo.Group, uc domain.StaffUsecase) {
 	handler := &StaffHandler{
 		Usecase: uc,

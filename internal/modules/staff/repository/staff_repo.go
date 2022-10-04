@@ -39,11 +39,6 @@ func (rp *StaffRepository) Find(c context.Context, id int) (*domain.Staff, error
 
 // Store will create data to db
 func (rp *StaffRepository) Store(c context.Context, staff *domain.Staff) error {
-	//passHash, err := utils.GeneratePassword(staff.Password)
-	//if err != nil {
-	//	return errors.Wrap(err)
-	//}
-	//staff.Password = passHash
 	if err := rp.DB.Create(staff).Error; err != nil {
 		return errors.Wrap(err)
 	}

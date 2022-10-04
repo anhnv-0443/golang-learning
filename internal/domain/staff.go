@@ -14,7 +14,7 @@ type Staff struct {
 	BirthDate   string     `json:"birth_date"`
 	Gender      int        `json:"gender"`
 	PhoneNumber string     `json:"phone_number"`
-	UnitId      int        `json:"unit_id"`
+	UnitID      int        `json:"unit_id"`
 	StaffTypeID int        `json:"staff_type_id"`
 	Address     string     `json:"address"`
 	CreatedAt   time.Time  `json:"created_at"`
@@ -36,7 +36,7 @@ type StaffRepository interface {
 	FindByQuery(ctx context.Context, q StaffQueryParam) (*Staff, error)
 }
 
-// StaffUseCase represent the staff's repository contract
+// StaffUsecase represent the staff's repository contract
 type StaffUsecase interface {
 	Fetch(context.Context) ([]Staff, error)
 	Find(ctx context.Context, id int) (*Staff, error)

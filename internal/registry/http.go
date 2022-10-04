@@ -4,8 +4,6 @@ import (
 	"go-app/config"
 	"go-app/internal/domain"
 	authHttp "go-app/internal/modules/auth/delivery/http"
-	languageCodeHttp "go-app/internal/modules/language_code/delivery/http"
-	positionHttp "go-app/internal/modules/position/delivery/http"
 	roleHttp "go-app/internal/modules/role/delivery/http"
 	slackHttp "go-app/internal/modules/slack/delivery/http"
 	staffHttp "go-app/internal/modules/staff/delivery/http"
@@ -47,8 +45,6 @@ func NewHTTPHandler(e *echo.Echo, uc *Usecase) {
 	}))
 
 	staffHttp.NewHandler(apiGroup, uc.StaffUsecase)
-	positionHttp.NewHandler(apiGroup, uc.PositionUsecase)
-	languageCodeHttp.NewHandler(apiGroup, uc.LanguageCodeUsecase)
 	// Middleware verifying request from slack
 	slackGroup.Use(slackHttp.SlackVerifyingRequests(config.GetSlackConfig()))
 

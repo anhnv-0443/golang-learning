@@ -2,14 +2,13 @@ package http
 
 import (
 	"go-app/internal/domain"
-
 	"time"
 )
 
 // StaffsResponse is array of staff response
 type StaffsResponse []StaffResponse
 
-// StaffRequest is struct used for create st
+// StaffRequest is struct used for create staff
 type StaffRequest struct {
 	Name        string `json:"name" validate:"required"`
 	Email       string `json:"email" validate:"required"`
@@ -17,7 +16,7 @@ type StaffRequest struct {
 	BirthDate   string `json:"birth_date" validate:"required"`
 	Gender      int    `json:"gender" validate:"required"`
 	PhoneNumber string `json:"phone_number" validate:"required"`
-	UnitId      int    `json:"unit_id" validate:"required"`
+	UnitID      int    `json:"unit_id" validate:"required"`
 	StaffTypeID int    `json:"staff_type_id" validate:"required"`
 	Address     string `json:"address" validate:"required"`
 }
@@ -31,7 +30,7 @@ type StaffResponse struct {
 	BirthDate   string    `json:"birth_date"`
 	Gender      int       `json:"gender"`
 	PhoneNumber string    `json:"phone_number"`
-	UnitId      int       `json:"unit_id"`
+	UnitID      int       `json:"unit_id"`
 	StaffTypeID int       `json:"staff_type_id"`
 	Address     string    `json:"address"`
 	CreatedAt   time.Time `json:"created_at"`
@@ -58,7 +57,7 @@ func ConvertStaffToResponse(staffs *domain.Staff) StaffResponse {
 		BirthDate:   staffs.BirthDate,
 		Gender:      staffs.Gender,
 		PhoneNumber: staffs.PhoneNumber,
-		UnitId:      staffs.UnitId,
+		UnitID:      staffs.UnitID,
 		StaffTypeID: staffs.StaffTypeID,
 		Address:     staffs.Address,
 		CreatedAt:   staffs.CreatedAt,
@@ -66,21 +65,20 @@ func ConvertStaffToResponse(staffs *domain.Staff) StaffResponse {
 	}
 }
 
-//// ConvertstaffsToResponse DTO
+// ConvertStaffsToResponse DTO
 func ConvertStaffsToResponse(staffs []domain.Staff) StaffsResponse {
 	staffsRes := make(StaffsResponse, 0)
 
 	for _, u := range staffs {
 		staffRes := StaffResponse{
-			ID:        u.ID,
-			Name:      u.Name,
-			Email:     u.Email,
-			StaffCode: u.StaffCode,
-			BirthDate: u.BirthDate,
-			//BirthDate:   u.BirthDate.Format("Y-m-d"),
+			ID:          u.ID,
+			Name:        u.Name,
+			Email:       u.Email,
+			StaffCode:   u.StaffCode,
+			BirthDate:   u.BirthDate,
 			Gender:      u.Gender,
 			PhoneNumber: u.PhoneNumber,
-			UnitId:      u.UnitId,
+			UnitID:      u.UnitID,
 			StaffTypeID: u.StaffTypeID,
 			Address:     u.Address,
 			CreatedAt:   u.CreatedAt,
@@ -93,8 +91,7 @@ func ConvertStaffsToResponse(staffs []domain.Staff) StaffsResponse {
 	return staffsRes
 }
 
-//
-//// ConvertRequestToEntity DTO
+// ConvertRequestToEntity DTO
 func ConvertRequestToEntity(u *StaffRequest) *domain.Staff {
 	return &domain.Staff{
 		Name:        u.Name,
@@ -103,7 +100,7 @@ func ConvertRequestToEntity(u *StaffRequest) *domain.Staff {
 		BirthDate:   u.BirthDate,
 		Gender:      u.Gender,
 		PhoneNumber: u.PhoneNumber,
-		UnitId:      u.UnitId,
+		UnitID:      u.UnitID,
 		StaffTypeID: u.StaffTypeID,
 		Address:     u.Address,
 	}

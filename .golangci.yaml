@@ -37,6 +37,8 @@ linters:
     - tagliatelle
     - paralleltest
     - gosec
+    - gofumpt
+    - goimports
   disable-all: false
 
 linters-settings:
@@ -63,6 +65,7 @@ issues:
   exclude-rules:
     - path: _test\.go
       linters:
+        - gofumpt
         - scopelint
         - funlen
         - gocognit
