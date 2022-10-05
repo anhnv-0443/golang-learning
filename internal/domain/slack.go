@@ -18,4 +18,5 @@ type SlackAppMentionEvent struct {
 // SlackUsecase represent the user's repository contract
 type SlackUsecase interface {
 	HandleAppMentionEvent(context.Context, *SlackAppMentionEvent) error
+	SendMessage(ctx context.Context, channel string, content string, mentionUser string) (string, error)
 }

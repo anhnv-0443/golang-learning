@@ -9,6 +9,8 @@ import (
 // SlackConfig to hold serect/key/config of slack
 type SlackConfig struct {
 	SigningSecret string `mapstructure:"SLACK_SIGNING_SECRET"`
+	SlackToken    string `mapstructure:"SLACK_TOKEN"`
+	SlackAPI      string `mapstructure:"SLACK_SEND_MESSAGE_API"`
 }
 
 // GetSlackConfig Unmarshal SlackConfig from env
