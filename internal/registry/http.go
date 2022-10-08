@@ -4,6 +4,7 @@ import (
 	"go-app/config"
 	"go-app/internal/domain"
 	authHttp "go-app/internal/modules/auth/delivery/http"
+	githubHttp "go-app/internal/modules/github/delivery/http"
 	roleHttp "go-app/internal/modules/role/delivery/http"
 	slackHttp "go-app/internal/modules/slack/delivery/http"
 	userHttp "go-app/internal/modules/user/delivery/http"
@@ -23,6 +24,7 @@ func NewHTTPHandler(e *echo.Echo, uc *Usecase) {
 
 	apiGroup := e.Group("/api")
 	slackGroup := e.Group("/slack")
+	githubGroup := e.Group("/github")
 
 	authGroup := apiGroup.Group("")
 
@@ -50,6 +52,8 @@ func NewHTTPHandler(e *echo.Echo, uc *Usecase) {
 	userHttp.NewHandler(apiGroup, uc.UserUsecase)
 
 	slackHttp.NewHandler(slackGroup, uc.SlackUsecase)
+	githubHttp.NewHandler(githubGroup, uc.GithubUsecase)
+
 }
 
 func corsAllowOrigin(origin string) (bool, error) {
