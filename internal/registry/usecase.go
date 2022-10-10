@@ -5,11 +5,13 @@ import (
 	authUC "go-app/internal/modules/auth/usecase"
 	roleUC "go-app/internal/modules/role/usecase"
 	slackUC "go-app/internal/modules/slack/usecase"
+	staffUC "go-app/internal/modules/staff/usecase"
 	userUC "go-app/internal/modules/user/usecase"
 )
 
 // Usecase registry
 type Usecase struct {
+	StaffUsecase domain.StaffUsecase
 	RoleUsecase  domain.RoleUsecase
 	UserUsecase  domain.UserUsecase
 	AuthUsecase  domain.AuthUsecase
@@ -22,6 +24,7 @@ func NewUsecase(repo *Repository) *Usecase {
 		RoleUsecase:  roleUC.NewUsecase(repo.RoleRepository),
 		UserUsecase:  userUC.NewUsecase(repo.UserRepository),
 		AuthUsecase:  authUC.NewUsecase(repo.UserRepository),
+		StaffUsecase: staffUC.NewUsecase(repo.StaffRepository),
 		SlackUsecase: slackUC.NewUsecase(),
 	}
 }

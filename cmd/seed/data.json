@@ -18,5 +18,26 @@
             "roleId": 1,
             "password": "Aa@123456"
         }
+    ],
+    "language_codes": [
+        {
+            "name": "PHP",
+            "description": "Doing"
+        },
+        {
+            "name": "Go",
+            "description": "Leaning"
+        }
+    ],
+    "positions": [
+        {
+            "name": "PSM"
+        },
+        {
+            "name": "Dev"
+        },
+        {
+            "name": "QA"
+        }
     ]
 }

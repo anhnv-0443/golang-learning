@@ -6,6 +6,7 @@ import (
 	authHttp "go-app/internal/modules/auth/delivery/http"
 	roleHttp "go-app/internal/modules/role/delivery/http"
 	slackHttp "go-app/internal/modules/slack/delivery/http"
+	staffHttp "go-app/internal/modules/staff/delivery/http"
 	userHttp "go-app/internal/modules/user/delivery/http"
 	"go-app/pkg/validate"
 	"net/http"
@@ -43,6 +44,7 @@ func NewHTTPHandler(e *echo.Echo, uc *Usecase) {
 		AllowMethods:    []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
 	}))
 
+	staffHttp.NewHandler(apiGroup, uc.StaffUsecase)
 	// Middleware verifying request from slack
 	slackGroup.Use(slackHttp.SlackVerifyingRequests(config.GetSlackConfig()))
 

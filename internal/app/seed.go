@@ -2,15 +2,13 @@ package app
 
 import (
 	"context"
+	"github.com/spf13/viper"
 	"go-app/config"
 	"go-app/internal/domain"
-	"go-app/pkg/errors"
-	"go-app/pkg/postgres"
-
-	"github.com/spf13/viper"
-
 	roleRepository "go-app/internal/modules/role/repository"
 	userRepository "go-app/internal/modules/user/repository"
+	"go-app/pkg/errors"
+	"go-app/pkg/postgres"
 )
 
 var pathJSON = "cmd/seed/data.json"
