@@ -21,6 +21,6 @@ func (uc *GithubUsecase) GetStatusPullRequest(ctx context.Context, owner string,
 }
 
 // NewUsecase will create new SlackUsecase object
-func NewUsecase() domain.SlackUsecase {
+func NewUsecase() domain.GithubUsecase {
 	return &GithubUsecase{}
 }
